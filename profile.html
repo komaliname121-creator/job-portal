@@ -1,191 +1,1123 @@
-<main class="max-w-7xl mx-auto px-6 py-16">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="mb-10">
+    <title>My Applications — Animated Dashboard</title>
 
-        <p class="text-purple-400
-                  text-sm
-                  font-semibold
-                  uppercase
-                  tracking-widest">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-            Dashboard
+    <style>
+        @keyframes float {
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+            50% {
+                transform: translate3d(20px, -25px, 0);
+            }
+        }
 
-        </p>
+        @keyframes floatReverse {
+            0%, 100% {
+                transform: translate3d(0, 0, 0);
+            }
+            50% {
+                transform: translate3d(-25px, 20px, 0);
+            }
+        }
 
-        <h1 class="text-4xl
-                   md:text-5xl
-                   font-bold
-                   mt-2">
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-            My Applications
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-        </h1>
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 rgba(139,92,246,0);
+            }
+            50% {
+                box-shadow: 0 0 35px rgba(139,92,246,.18);
+            }
+        }
 
-        <p class="text-slate-500 mt-3">
-            Track every application from one place.
-        </p>
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-150%);
+            }
+            100% {
+                transform: translateX(150%);
+            }
+        }
+
+        .float {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .float-reverse {
+            animation: floatReverse 10s ease-in-out infinite;
+        }
+
+        .fade-up {
+            animation: fadeUp .7s ease-out both;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                #c084fc,
+                #818cf8,
+                #22d3ee,
+                #c084fc
+            );
+            background-size: 300% 300%;
+            animation: gradientMove 5s ease infinite;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(255,255,255,.045);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .stat-card {
+            transition:
+                transform .4s cubic-bezier(.2,.8,.2,1),
+                border-color .4s ease,
+                box-shadow .4s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(168,85,247,.35);
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.25),
+                0 0 35px rgba(139,92,246,.10);
+        }
+
+        .application-card {
+            position: relative;
+            overflow: hidden;
+            transition:
+                transform .4s cubic-bezier(.2,.8,.2,1),
+                border-color .4s ease,
+                box-shadow .4s ease;
+        }
+
+        .application-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(
+                    110deg,
+                    transparent 20%,
+                    rgba(255,255,255,.06) 45%,
+                    transparent 70%
+                );
+            transform: translateX(-120%);
+            transition: transform .8s ease;
+            pointer-events: none;
+        }
+
+        .application-card:hover::before {
+            transform: translateX(120%);
+        }
+
+        .application-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(168,85,247,.35);
+            box-shadow:
+                0 20px 55px rgba(0,0,0,.28),
+                0 0 40px rgba(124,58,237,.08);
+        }
+
+        .company-logo {
+            transition:
+                transform .4s ease,
+                box-shadow .4s ease;
+        }
+
+        .application-card:hover .company-logo {
+            transform: rotate(-5deg) scale(1.08);
+            box-shadow: 0 10px 30px rgba(139,92,246,.20);
+        }
+
+        .status {
+            transition: all .3s ease;
+        }
+
+        .application-card:hover .status {
+            transform: scale(1.05);
+        }
+
+        .progress-bar {
+            background: linear-gradient(
+                90deg,
+                #8b5cf6,
+                #6366f1,
+                #06b6d4
+            );
+            background-size: 200% 100%;
+            animation: gradientMove 4s linear infinite;
+        }
+
+        .pulse-card {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        .orb {
+            filter: blur(1px);
+        }
+    </style>
+</head>
+
+
+<body class="
+    min-h-screen
+    bg-[#050816]
+    text-white
+    overflow-x-hidden
+">
+
+
+    <!-- =====================================================
+         BACKGROUND
+    ====================================================== -->
+
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+
+        <!-- Purple Orb -->
+
+        <div class="
+            orb
+            float
+            absolute
+            -top-40
+            -left-40
+            w-[32rem]
+            h-[32rem]
+            rounded-full
+            bg-purple-600/20
+            blur-3xl
+        "></div>
+
+
+        <!-- Cyan Orb -->
+
+        <div class="
+            orb
+            float-reverse
+            absolute
+            top-1/3
+            -right-40
+            w-[30rem]
+            h-[30rem]
+            rounded-full
+            bg-cyan-500/15
+            blur-3xl
+        "></div>
+
+
+        <!-- Pink Orb -->
+
+        <div class="
+            orb
+            float
+            absolute
+            bottom-[-12rem]
+            left-1/3
+            w-[28rem]
+            h-[28rem]
+            rounded-full
+            bg-fuchsia-600/10
+            blur-3xl
+        "></div>
+
+
+        <!-- Radial Light -->
+
+        <div class="
+            absolute
+            inset-0
+            bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,.14),transparent_42%)]
+        "></div>
+
+
+        <!-- Grid -->
+
+        <div class="
+            absolute
+            inset-0
+            opacity-[.035]
+            bg-[linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)]
+            bg-[size:60px_60px]
+        "></div>
 
     </div>
 
 
-    <div class="grid md:grid-cols-4 gap-4 mb-8">
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
 
-        <div class="p-6 rounded-2xl
-                    bg-white/5
-                    border border-white/10">
+    <main class="
+        relative
+        max-w-7xl
+        mx-auto
+        px-5
+        sm:px-6
+        py-14
+        lg:py-20
+    ">
 
-            <p class="text-slate-500 text-sm">
-                Total
+
+        <!-- =================================================
+             HEADER
+        ================================================== -->
+
+        <div class="mb-12 fade-up">
+
+            <div class="
+                inline-flex
+                items-center
+                gap-2
+                px-4
+                py-2
+                rounded-full
+                bg-purple-500/10
+                border border-purple-400/20
+                text-purple-300
+                text-xs
+                font-bold
+                uppercase
+                tracking-[.2em]
+            ">
+
+                <span class="
+                    w-2
+                    h-2
+                    rounded-full
+                    bg-purple-400
+                    shadow-[0_0_12px_#a855f7]
+                    animate-pulse
+                "></span>
+
+                Dashboard
+
+            </div>
+
+
+            <h1 class="
+                text-5xl
+                md:text-6xl
+                lg:text-7xl
+                font-black
+                tracking-tight
+                mt-5
+            ">
+
+                My
+                <span class="gradient-text">
+                    Applications
+                </span>
+
+            </h1>
+
+
+            <p class="
+                text-slate-400
+                text-base
+                md:text-lg
+                mt-5
+                max-w-xl
+            ">
+
+                Track every application, interview and offer
+                from one beautiful workspace.
+
             </p>
-
-            <h2 class="text-3xl font-bold mt-2">
-                12
-            </h2>
 
         </div>
 
 
-        <div class="p-6 rounded-2xl
-                    bg-yellow-500/5
-                    border border-yellow-500/10">
+        <!-- =================================================
+             STAT CARDS
+        ================================================== -->
 
-            <p class="text-slate-500 text-sm">
-                Pending
-            </p>
-
-            <h2 class="text-3xl font-bold mt-2">
-                5
-            </h2>
-
-        </div>
+        <div class="
+            grid
+            grid-cols-2
+            lg:grid-cols-4
+            gap-4
+            mb-10
+        ">
 
 
-        <div class="p-6 rounded-2xl
-                    bg-cyan-500/5
-                    border border-cyan-500/10">
+            <!-- TOTAL -->
 
-            <p class="text-slate-500 text-sm">
-                Interviews
-            </p>
-
-            <h2 class="text-3xl font-bold mt-2">
-                3
-            </h2>
-
-        </div>
-
-
-        <div class="p-6 rounded-2xl
-                    bg-green-500/5
-                    border border-green-500/10">
-
-            <p class="text-slate-500 text-sm">
-                Offers
-            </p>
-
-            <h2 class="text-3xl font-bold mt-2">
-                2
-            </h2>
-
-        </div>
-
-    </div>
-
-
-    <div class="space-y-4">
-
-        <div class="p-6 rounded-2xl
-                    bg-white/5
+            <div
+                class="
+                    stat-card
+                    glass-card
+                    p-5
+                    sm:p-6
+                    rounded-3xl
                     border border-white/10
-                    hover:border-purple-500/30
-                    transition">
+                    fade-up
+                "
+                style="animation-delay:.1s"
+            >
 
-            <div class="flex flex-col md:flex-row
-                        md:items-center
-                        justify-between
-                        gap-5">
-
-                <div class="flex items-center gap-4">
-
-                    <div class="w-12 h-12
-                                rounded-xl
-                                bg-white
-                                text-black
-                                flex items-center
-                                justify-center
-                                font-bold">
-
-                        G
-
-                    </div>
+                <div class="flex items-center justify-between">
 
                     <div>
 
-                        <h3 class="font-bold text-lg">
-                            Senior Frontend Developer
-                        </h3>
-
-                        <p class="text-sm text-slate-500">
-                            Google · Bengaluru
+                        <p class="text-slate-500 text-sm">
+                            Total
                         </p>
 
+                        <h2 class="
+                            text-4xl
+                            font-black
+                            mt-2
+                        ">
+                            12
+                        </h2>
+
+                    </div>
+
+
+                    <div class="
+                        w-11
+                        h-11
+                        rounded-2xl
+                        bg-purple-500/10
+                        text-purple-400
+                        flex
+                        items-center
+                        justify-center
+                        text-xl
+                    ">
+                        ◈
                     </div>
 
                 </div>
 
 
-                <span class="px-4 py-2
-                             rounded-full
-                             bg-cyan-500/10
-                             text-cyan-400
-                             text-sm
-                             font-semibold">
-
-                    Interview
-
-                </span>
-
-            </div>
-
-        </div>
-
-
-        <div class="p-6 rounded-2xl
+                <div class="
+                    mt-5
+                    h-1
+                    rounded-full
                     bg-white/5
-                    border border-white/10">
+                    overflow-hidden
+                ">
 
-            <div class="flex flex-col md:flex-row
-                        md:items-center
-                        justify-between
-                        gap-5">
-
-                <div>
-
-                    <h3 class="font-bold text-lg">
-                        Product Designer
-                    </h3>
-
-                    <p class="text-sm text-slate-500">
-                        Microsoft · Hyderabad
-                    </p>
+                    <div
+                        class="
+                            progress-bar
+                            h-full
+                            rounded-full
+                            w-[80%]
+                        "
+                    ></div>
 
                 </div>
 
-                <span class="px-4 py-2
-                             rounded-full
-                             bg-yellow-500/10
-                             text-yellow-400
-                             text-sm
-                             font-semibold">
+            </div>
 
-                    Under Review
 
-                </span>
+            <!-- PENDING -->
+
+            <div
+                class="
+                    stat-card
+                    glass-card
+                    p-5
+                    sm:p-6
+                    rounded-3xl
+                    border border-yellow-500/10
+                    bg-yellow-500/[.035]
+                    fade-up
+                "
+                style="animation-delay:.2s"
+            >
+
+                <div class="flex items-center justify-between">
+
+                    <div>
+
+                        <p class="text-slate-500 text-sm">
+                            Pending
+                        </p>
+
+                        <h2 class="
+                            text-4xl
+                            font-black
+                            mt-2
+                            text-yellow-300
+                        ">
+                            5
+                        </h2>
+
+                    </div>
+
+
+                    <div class="
+                        w-11
+                        h-11
+                        rounded-2xl
+                        bg-yellow-500/10
+                        text-yellow-400
+                        flex
+                        items-center
+                        justify-center
+                        text-xl
+                    ">
+                        ◷
+                    </div>
+
+                </div>
+
+
+                <p class="
+                    text-xs
+                    text-yellow-400/60
+                    mt-5
+                ">
+                    42% of applications
+                </p>
+
+            </div>
+
+
+            <!-- INTERVIEWS -->
+
+            <div
+                class="
+                    stat-card
+                    glass-card
+                    p-5
+                    sm:p-6
+                    rounded-3xl
+                    border border-cyan-500/10
+                    bg-cyan-500/[.035]
+                    fade-up
+                "
+                style="animation-delay:.3s"
+            >
+
+                <div class="flex items-center justify-between">
+
+                    <div>
+
+                        <p class="text-slate-500 text-sm">
+                            Interviews
+                        </p>
+
+                        <h2 class="
+                            text-4xl
+                            font-black
+                            mt-2
+                            text-cyan-300
+                        ">
+                            3
+                        </h2>
+
+                    </div>
+
+
+                    <div class="
+                        w-11
+                        h-11
+                        rounded-2xl
+                        bg-cyan-500/10
+                        text-cyan-400
+                        flex
+                        items-center
+                        justify-center
+                        text-xl
+                    ">
+                        ✦
+                    </div>
+
+                </div>
+
+
+                <p class="
+                    text-xs
+                    text-cyan-400/60
+                    mt-5
+                ">
+                    3 upcoming opportunities
+                </p>
+
+            </div>
+
+
+            <!-- OFFERS -->
+
+            <div
+                class="
+                    stat-card
+                    glass-card
+                    p-5
+                    sm:p-6
+                    rounded-3xl
+                    border border-green-500/10
+                    bg-green-500/[.035]
+                    fade-up
+                    pulse-card
+                "
+                style="animation-delay:.4s"
+            >
+
+                <div class="flex items-center justify-between">
+
+                    <div>
+
+                        <p class="text-slate-500 text-sm">
+                            Offers
+                        </p>
+
+                        <h2 class="
+                            text-4xl
+                            font-black
+                            mt-2
+                            text-green-300
+                        ">
+                            2
+                        </h2>
+
+                    </div>
+
+
+                    <div class="
+                        w-11
+                        h-11
+                        rounded-2xl
+                        bg-green-500/10
+                        text-green-400
+                        flex
+                        items-center
+                        justify-center
+                        text-xl
+                    ">
+                        ✓
+                    </div>
+
+                </div>
+
+
+                <p class="
+                    text-xs
+                    text-green-400/60
+                    mt-5
+                ">
+                    16.6% success rate
+                </p>
 
             </div>
 
         </div>
 
-    </div>
 
-</main>
+        <!-- =================================================
+             APPLICATIONS HEADER
+        ================================================== -->
+
+        <div class="
+            flex
+            flex-col
+            sm:flex-row
+            sm:items-center
+            justify-between
+            gap-4
+            mb-5
+            fade-up
+        " style="animation-delay:.45s">
+
+            <div>
+
+                <h2 class="text-2xl font-bold">
+                    Recent Applications
+                </h2>
+
+                <p class="
+                    text-sm
+                    text-slate-500
+                    mt-1
+                ">
+                    Your latest career opportunities
+                </p>
+
+            </div>
+
+
+            <button class="
+                group
+                px-5
+                py-2.5
+                rounded-xl
+                bg-white/5
+                border border-white/10
+                text-sm
+                font-semibold
+                hover:bg-purple-500/10
+                hover:border-purple-400/30
+                transition-all
+            ">
+
+                View all
+
+                <span class="
+                    inline-block
+                    ml-1
+                    group-hover:translate-x-1
+                    transition-transform
+                ">
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             APPLICATION LIST
+        ================================================== -->
+
+        <div class="space-y-4">
+
+
+            <!-- GOOGLE -->
+
+            <div
+                class="
+                    application-card
+                    glass-card
+                    p-5
+                    sm:p-6
+                    rounded-3xl
+                    border border-white/10
+                    fade-up
+                "
+                style="animation-delay:.5s"
+            >
+
+                <div class="
+                    relative
+                    flex
+                    flex-col
+                    md:flex-row
+                    md:items-center
+                    justify-between
+                    gap-5
+                ">
+
+
+                    <div class="flex items-center gap-4">
+
+
+                        <div class="
+                            company-logo
+                            w-14
+                            h-14
+                            shrink-0
+                            rounded-2xl
+                            bg-white
+                            text-slate-900
+                            flex
+                            items-center
+                            justify-center
+                            font-black
+                            text-xl
+                            shadow-lg
+                        ">
+
+                            G
+
+                        </div>
+
+
+                        <div>
+
+                            <h3 class="
+                                font-bold
+                                text-lg
+                                sm:text-xl
+                            ">
+                                Senior Frontend Developer
+                            </h3>
+
+                            <p class="
+                                text-sm
+                                text-slate-500
+                                mt-1
+                            ">
+                                Google · Bengaluru
+                            </p>
+
+                            <p class="
+                                text-xs
+                                text-slate-600
+                                mt-2
+                            ">
+                                Applied 2 days ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="
+                        flex
+                        items-center
+                        justify-between
+                        md:justify-end
+                        gap-4
+                    ">
+
+                        <span class="
+                            status
+                            px-4
+                            py-2
+                            rounded-full
+                            bg-cyan-500/10
+                            border border-cyan-400/10
+                            text-cyan-400
+                            text-sm
+                            font-semibold
+                            shadow-[0_0_20px_rgba(6,182,212,.08)]
+                        ">
+
+                            ● Interview
+
+                        </span>
+
+
+                        <button class="
+                            w-10
+                            h-10
+                            rounded-xl
+                            bg-white/5
+                            border border-white/10
+                            text-slate-400
+                            hover:text-white
+                            hover:bg-white/10
+                            transition
+                        ">
+                            ⋮
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MICROSOFT -->
+
+            <div
+                class="
+                    application-card
+                    glass-card
+                    p-5
+                    sm:p-6
+                    rounded-3xl
+                    border border-white/10
+                    fade-up
+                "
+                style="animation-delay:.6s"
+            >
+
+                <div class="
+                    relative
+                    flex
+                    flex-col
+                    md:flex-row
+                    md:items-center
+                    justify-between
+                    gap-5
+                ">
+
+
+                    <div class="flex items-center gap-4">
+
+
+                        <div class="
+                            company-logo
+                            w-14
+                            h-14
+                            shrink-0
+                            rounded-2xl
+                            bg-gradient-to-br
+                            from-blue-500
+                            to-cyan-400
+                            text-white
+                            flex
+                            items-center
+                            justify-center
+                            font-black
+                            text-xl
+                            shadow-lg
+                        ">
+
+                            M
+
+                        </div>
+
+
+                        <div>
+
+                            <h3 class="
+                                font-bold
+                                text-lg
+                                sm:text-xl
+                            ">
+                                Product Designer
+                            </h3>
+
+                            <p class="
+                                text-sm
+                                text-slate-500
+                                mt-1
+                            ">
+                                Microsoft · Hyderabad
+                            </p>
+
+                            <p class="
+                                text-xs
+                                text-slate-600
+                                mt-2
+                            ">
+                                Applied 5 days ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="
+                        flex
+                        items-center
+                        justify-between
+                        md:justify-end
+                        gap-4
+                    ">
+
+                        <span class="
+                            status
+                            px-4
+                            py-2
+                            rounded-full
+                            bg-yellow-500/10
+                            border border-yellow-400/10
+                            text-yellow-400
+                            text-sm
+                            font-semibold
+                        ">
+
+                            ● Under Review
+
+                        </span>
+
+
+                        <button class="
+                            w-10
+                            h-10
+                            rounded-xl
+                            bg-white/5
+                            border border-white/10
+                            text-slate-400
+                            hover:text-white
+                            hover:bg-white/10
+                            transition
+                        ">
+                            ⋮
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- THIRD APPLICATION -->
+
+            <div
+                class="
+                    application-card
+                    glass-card
+                    p-5
+                    sm:p-6
+                    rounded-3xl
+                    border border-white/10
+                    fade-up
+                "
+                style="animation-delay:.7s"
+            >
+
+                <div class="
+                    relative
+                    flex
+                    flex-col
+                    md:flex-row
+                    md:items-center
+                    justify-between
+                    gap-5
+                ">
+
+
+                    <div class="flex items-center gap-4">
+
+
+                        <div class="
+                            company-logo
+                            w-14
+                            h-14
+                            shrink-0
+                            rounded-2xl
+                            bg-gradient-to-br
+                            from-fuchsia-500
+                            to-purple-600
+                            text-white
+                            flex
+                            items-center
+                            justify-center
+                            font-black
+                            text-xl
+                            shadow-lg
+                        ">
+
+                            A
+
+                        </div>
+
+
+                        <div>
+
+                            <h3 class="
+                                font-bold
+                                text-lg
+                                sm:text-xl
+                            ">
+                                Full Stack Engineer
+                            </h3>
+
+                            <p class="
+                                text-sm
+                                text-slate-500
+                                mt-1
+                            ">
+                                Adobe · Noida
+                            </p>
+
+                            <p class="
+                                text-xs
+                                text-slate-600
+                                mt-2
+                            ">
+                                Applied 1 week ago
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="
+                        flex
+                        items-center
+                        justify-between
+                        md:justify-end
+                        gap-4
+                    ">
+
+                        <span class="
+                            status
+                            px-4
+                            py-2
+                            rounded-full
+                            bg-green-500/10
+                            border border-green-400/10
+                            text-green-400
+                            text-sm
+                            font-semibold
+                        ">
+
+                            ● Offer
+
+                        </span>
+
+
+                        <button class="
+                            w-10
+                            h-10
+                            rounded-xl
+                            bg-white/5
+                            border border-white/10
+                            text-slate-400
+                            hover:text-white
+                            hover:bg-white/10
+                            transition
+                        ">
+                            ⋮
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <div class="
+            text-center
+            text-xs
+            text-slate-600
+            mt-10
+        ">
+
+            Your career journey, beautifully organized.
+
+        </div>
+
+    </main>
+
+</body>
+</html>
