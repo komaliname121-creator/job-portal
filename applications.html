@@ -1,235 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Jobify</title>
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f8f7ff;
-        }
-
-        /* ================= NAVBAR ================= */
-
-        .navbar {
-            width: 100%;
-            background: #ffffff;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            width: 92%;
-            max-width: 1200px;
-            margin: auto;
-
-            min-height: 75px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        /* LOGO */
-
-        .logo {
-            text-decoration: none;
-
-            font-size: 30px;
-            font-weight: 800;
-
-            background: linear-gradient(
-                90deg,
-                #4f46e5,
-                #9333ea,
-                #ec4899
-            );
-
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* NAV LINKS */
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-
-            color: #374151;
-
-            font-size: 16px;
-            font-weight: 600;
-
-            padding: 10px 5px;
-
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #6366f1;
-        }
-
-        .nav-links a.active {
-            color: #6366f1;
-
-            border-bottom: 3px solid #6366f1;
-        }
-
-        /* BUTTONS */
-
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .login-btn {
-            padding: 10px 18px;
-
-            border: 2px solid #6366f1;
-
-            border-radius: 8px;
-
-            background: white;
-
-            color: #6366f1;
-
-            font-weight: bold;
-        }
-
-        .signup-btn {
-            padding: 11px 19px;
-
-            border: none;
-
-            border-radius: 8px;
-
-            background: linear-gradient(
-                135deg,
-                #6366f1,
-                #9333ea
-            );
-
-            color: white;
-
-            font-weight: bold;
-        }
-
-        /* MOBILE */
-
-        @media(max-width: 800px) {
-
-            .nav-container {
-                flex-direction: column;
-
-                gap: 18px;
-
-                padding: 20px 0;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-
-                justify-content: center;
-
-                gap: 15px;
-            }
-
-            .nav-buttons {
-                display: none;
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerHub | Applications</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
+<body class="bg-slate-50 text-slate-800">
 
-<body>
+  <!-- Navbar -->
+  <nav class="bg-white border-b sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
+      <a href="about.html" class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-xl">C</div>
+        <span class="text-2xl font-bold">Career<span class="text-indigo-600">Hub</span></span>
+      </a>
 
-    <!-- ================= NAVBAR ================= -->
+      <div class="hidden md:flex gap-8 text-sm font-medium">
+        <a href="about.html" class="hover:text-indigo-600">About</a>
+        <a href="profile.html" class="hover:text-indigo-600">Profile</a>
+        <a href="applications.html" class="text-indigo-600">Applications</a>
+        <a href="resume.html" class="hover:text-indigo-600">Resume</a>
+      </div>
 
-    <nav class="navbar">
+      <button class="md:hidden text-2xl">☰</button>
+    </div>
+  </nav>
 
-        <div class="nav-container">
+  <main class="max-w-7xl mx-auto px-6 py-10">
 
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <h1 class="text-4xl font-bold text-slate-900">My Applications</h1>
+        <p class="text-slate-500 mt-2">Track all your job applications in one place.</p>
+      </div>
 
-            <!-- LOGO -->
+      <button class="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold">
+        + Find New Jobs
+      </button>
+    </div>
 
-            <a href="index.html" class="logo">
-                Jobify
-            </a>
+    <!-- Stats -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
 
+      <div class="bg-white border rounded-2xl p-6">
+        <p class="text-slate-500 text-sm">Total Applications</p>
+        <p class="text-3xl font-bold mt-2">24</p>
+      </div>
 
-            <!-- LINKS -->
+      <div class="bg-white border rounded-2xl p-6">
+        <p class="text-slate-500 text-sm">In Review</p>
+        <p class="text-3xl font-bold mt-2 text-blue-600">8</p>
+      </div>
 
-            <div class="nav-links">
+      <div class="bg-white border rounded-2xl p-6">
+        <p class="text-slate-500 text-sm">Interviews</p>
+        <p class="text-3xl font-bold mt-2 text-purple-600">5</p>
+      </div>
 
-                <a href="index.html">
-                    Home
-                </a>
+      <div class="bg-white border rounded-2xl p-6">
+        <p class="text-slate-500 text-sm">Offers</p>
+        <p class="text-3xl font-bold mt-2 text-green-600">2</p>
+      </div>
 
-                <a href="about.html">
-                    About
-                </a>
+    </div>
 
-                <!-- EXACT FILE NAME -->
-                <a href="applications.html">
-                    Applications
-                </a>
+    <!-- Applications -->
+    <section class="bg-white border rounded-3xl mt-8 overflow-hidden">
 
-                <a href="profile.html">
-                    Profile
-                </a>
+      <div class="p-6 border-b flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <h2 class="text-xl font-bold">Recent Applications</h2>
 
-                <a href="resume.html">
-                    Resume
-                </a>
+        <div class="flex gap-2">
+          <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-lg text-sm font-semibold">
+            All
+          </button>
+          <button class="px-4 py-2 hover:bg-slate-100 rounded-lg text-sm">Active</button>
+          <button class="px-4 py-2 hover:bg-slate-100 rounded-lg text-sm">Closed</button>
+        </div>
+      </div>
 
+      <div class="divide-y">
+
+        <!-- Application -->
+        <div class="p-6 hover:bg-slate-50 transition">
+          <div class="flex flex-col md:flex-row md:items-center gap-5">
+
+            <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold">
+              G
             </div>
 
-
-            <!-- BUTTONS -->
-
-            <div class="nav-buttons">
-
-                <button class="login-btn">
-                    Login
-                </button>
-
-                <button class="signup-btn">
-                    Sign Up
-                </button>
-
+            <div class="flex-1">
+              <h3 class="font-bold text-lg">Frontend Developer</h3>
+              <p class="text-slate-500">Google · Bengaluru</p>
+              <p class="text-xs text-slate-400 mt-2">Applied Aug 15, 2026</p>
             </div>
 
+            <span class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-semibold">
+              In Review
+            </span>
 
+            <button class="border px-4 py-2 rounded-xl hover:bg-white">
+              View
+            </button>
+
+          </div>
         </div>
 
-    </nav>
+        <div class="p-6 hover:bg-slate-50 transition">
+          <div class="flex flex-col md:flex-row md:items-center gap-5">
 
+            <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl font-bold">
+              A
+            </div>
 
+            <div class="flex-1">
+              <h3 class="font-bold text-lg">UI/UX Designer</h3>
+              <p class="text-slate-500">Adobe · Hyderabad</p>
+              <p class="text-xs text-slate-400 mt-2">Applied Aug 12, 2026</p>
+            </div>
+
+            <span class="px-4 py-2 bg-purple-50 text-purple-600 rounded-full text-sm font-semibold">
+              Interview
+            </span>
+
+            <button class="border px-4 py-2 rounded-xl hover:bg-white">
+              View
+            </button>
+
+          </div>
+        </div>
+
+        <div class="p-6 hover:bg-slate-50 transition">
+          <div class="flex flex-col md:flex-row md:items-center gap-5">
+
+            <div class="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-xl font-bold">
+              M
+            </div>
+
+            <div class="flex-1">
+              <h3 class="font-bold text-lg">Product Manager</h3>
+              <p class="text-slate-500">Microsoft · Pune</p>
+              <p class="text-xs text-slate-400 mt-2">Applied Aug 10, 2026</p>
+            </div>
+
+            <span class="px-4 py-2 bg-green-50 text-green-600 rounded-full text-sm font-semibold">
+              Offer
+            </span>
+
+            <button class="border px-4 py-2 rounded-xl hover:bg-white">
+              View
+            </button>
+
+          </div>
+        </div>
+
+        <div class="p-6 hover:bg-slate-50 transition">
+          <div class="flex flex-col md:flex-row md:items-center gap-5">
+
+            <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-xl font-bold">
+              A
+            </div>
+
+            <div class="flex-1">
+              <h3 class="font-bold text-lg">Software Engineer</h3>
+              <p class="text-slate-500">Amazon · Bengaluru</p>
+              <p class="text-xs text-slate-400 mt-2">Applied Aug 05, 2026</p>
+            </div>
+
+            <span class="px-4 py-2 bg-red-50 text-red-600 rounded-full text-sm font-semibold">
+              Rejected
+            </span>
+
+            <button class="border px-4 py-2 rounded-xl hover:bg-white">
+              View
+            </button>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
 </body>
-
 </html>
