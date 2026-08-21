@@ -1,307 +1,874 @@
-<main class="max-w-7xl mx-auto px-6 py-12">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Resume Builder</title>
 
-    <div class="mb-10">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <p class="text-purple-400
-                  text-sm
-                  font-semibold
-                  uppercase
-                  tracking-widest">
+    <style>
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-30px) translateX(15px);
+            }
+        }
 
-            Career Tools
+        @keyframes floatReverse {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(25px) translateX(-20px);
+            }
+        }
 
-        </p>
+        @keyframes pulseGlow {
+            0%, 100% {
+                opacity: .35;
+                transform: scale(1);
+            }
+            50% {
+                opacity: .7;
+                transform: scale(1.15);
+            }
+        }
 
-        <h1 class="text-4xl font-bold mt-2">
-            Resume Builder
-        </h1>
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-        <p class="text-slate-500 mt-2">
-            Create a professional resume recruiters notice.
-        </p>
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(35px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-150%);
+            }
+            100% {
+                transform: translateX(150%);
+            }
+        }
+
+        .animate-float {
+            animation: float 7s ease-in-out infinite;
+        }
+
+        .animate-float-reverse {
+            animation: floatReverse 9s ease-in-out infinite;
+        }
+
+        .animate-glow {
+            animation: pulseGlow 5s ease-in-out infinite;
+        }
+
+        .animate-slide-up {
+            animation: slideUp .8s ease-out both;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                #c084fc,
+                #818cf8,
+                #22d3ee,
+                #c084fc
+            );
+            background-size: 300% 300%;
+            animation: gradientMove 5s ease infinite;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .animated-border {
+            position: relative;
+        }
+
+        .animated-border::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(
+                90deg,
+                #9333ea,
+                #4f46e5,
+                #06b6d4,
+                #9333ea
+            );
+            background-size: 300% 300%;
+            animation: gradientMove 5s linear infinite;
+
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+
+            pointer-events: none;
+        }
+
+        .glass {
+            background: rgba(15, 23, 42, .62);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        .input-glow {
+            transition:
+                border-color .3s ease,
+                box-shadow .3s ease,
+                transform .3s ease;
+        }
+
+        .input-glow:focus {
+            border-color: #8b5cf6;
+            box-shadow:
+                0 0 0 3px rgba(139, 92, 246, .12),
+                0 0 30px rgba(139, 92, 246, .12);
+            transform: translateY(-2px);
+        }
+
+        .resume-card {
+            transition:
+                transform .5s cubic-bezier(.2,.8,.2,1),
+                box-shadow .5s ease;
+        }
+
+        .resume-card:hover {
+            transform: translateY(-8px) rotateX(1deg);
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.35),
+                0 0 60px rgba(139,92,246,.12);
+        }
+
+        .skill {
+            transition: all .3s ease;
+        }
+
+        .skill:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(124,58,237,.18);
+        }
+
+        .save-button {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .save-button::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 35%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,.35),
+                transparent
+            );
+            transform: translateX(-150%);
+        }
+
+        .save-button:hover::after {
+            animation: shine .8s ease;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-[#050816] text-white overflow-x-hidden">
+
+    <!-- BACKGROUND GLOW -->
+
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+
+        <div class="
+            absolute
+            -top-32
+            -left-32
+            w-96
+            h-96
+            rounded-full
+            bg-purple-600/30
+            blur-3xl
+            animate-float
+        "></div>
+
+        <div class="
+            absolute
+            top-1/3
+            -right-32
+            w-[30rem]
+            h-[30rem]
+            rounded-full
+            bg-indigo-600/20
+            blur-3xl
+            animate-float-reverse
+        "></div>
+
+        <div class="
+            absolute
+            bottom-0
+            left-1/3
+            w-80
+            h-80
+            rounded-full
+            bg-cyan-500/10
+            blur-3xl
+            animate-glow
+        "></div>
+
+        <div class="
+            absolute inset-0
+            bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,.12),transparent_40%)]
+        "></div>
 
     </div>
 
 
-    <div class="grid lg:grid-cols-2 gap-8">
+    <!-- MAIN -->
+
+    <main class="relative max-w-7xl mx-auto px-5 sm:px-6 py-12 lg:py-20">
+
+        <!-- HEADER -->
+
+        <div class="mb-12 animate-slide-up">
+
+            <div class="inline-flex items-center gap-2
+                        px-4 py-2
+                        rounded-full
+                        border border-purple-400/20
+                        bg-purple-500/10
+                        text-purple-300
+                        text-xs font-bold
+                        uppercase tracking-[.2em]
+                        shadow-lg shadow-purple-900/10">
+
+                <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+
+                Career Tools
+
+            </div>
+
+            <h1 class="
+                text-5xl
+                sm:text-6xl
+                lg:text-7xl
+                font-black
+                tracking-tight
+                mt-5
+            ">
+
+                Build a resume
+                <span class="gradient-text">
+                    recruiters remember.
+                </span>
+
+            </h1>
+
+            <p class="
+                text-slate-400
+                text-base
+                sm:text-lg
+                max-w-2xl
+                mt-5
+                leading-relaxed
+            ">
+
+                Create a stunning professional resume with a
+                modern interface designed to make your career
+                stand out.
+
+            </p>
+
+        </div>
 
 
-        <!-- EDITOR -->
+        <!-- GRID -->
 
-        <div class="p-7
-                    rounded-3xl
-                    bg-white/5
-                    border border-white/10">
-
-            <h2 class="text-xl font-bold mb-6">
-                Personal Information
-            </h2>
+        <div class="grid lg:grid-cols-2 gap-8 xl:gap-10">
 
 
-            <div class="space-y-5">
+            <!-- EDITOR -->
 
-                <div>
+            <div class="
+                animated-border
+                glass
+                rounded-[2rem]
+                p-6 sm:p-8
+                shadow-2xl
+                shadow-purple-950/20
+                animate-slide-up
+            " style="animation-delay:.15s">
 
-                    <label class="text-sm
-                                  text-slate-400">
+                <div class="flex items-center justify-between mb-8">
 
-                        Full Name
+                    <div>
 
-                    </label>
+                        <p class="
+                            text-xs
+                            uppercase
+                            tracking-[.2em]
+                            text-purple-400
+                            font-bold
+                        ">
+                            Step 01
+                        </p>
 
-                    <input
-                        value="John Doe"
-                        class="w-full mt-2
-                               px-4 py-3
-                               rounded-xl
-                               bg-slate-900
-                               border border-white/10
-                               outline-none
-                               focus:border-purple-500">
+                        <h2 class="text-2xl font-bold mt-1">
+                            Personal Information
+                        </h2>
+
+                    </div>
+
+                    <div class="
+                        w-11 h-11
+                        rounded-2xl
+                        bg-gradient-to-br
+                        from-purple-500
+                        to-indigo-600
+                        flex items-center justify-center
+                        shadow-lg shadow-purple-500/30
+                    ">
+                        ✦
+                    </div>
 
                 </div>
 
 
-                <div>
+                <div class="space-y-6">
 
-                    <label class="text-sm
-                                  text-slate-400">
 
-                        Job Title
+                    <!-- NAME -->
 
-                    </label>
+                    <div>
 
-                    <input
-                        value="Senior Frontend Developer"
-                        class="w-full mt-2
-                               px-4 py-3
-                               rounded-xl
-                               bg-slate-900
-                               border border-white/10
-                               outline-none
-                               focus:border-purple-500">
+                        <label class="text-sm text-slate-400">
+                            Full Name
+                        </label>
+
+                        <input
+                            value="John Doe"
+                            class="
+                                input-glow
+                                w-full mt-2
+                                px-4 py-3.5
+                                rounded-2xl
+                                bg-slate-950/70
+                                border border-white/10
+                                outline-none
+                                text-white
+                                placeholder-slate-600
+                            "
+                        >
+
+                    </div>
+
+
+                    <!-- JOB -->
+
+                    <div>
+
+                        <label class="text-sm text-slate-400">
+                            Job Title
+                        </label>
+
+                        <input
+                            value="Senior Frontend Developer"
+                            class="
+                                input-glow
+                                w-full mt-2
+                                px-4 py-3.5
+                                rounded-2xl
+                                bg-slate-950/70
+                                border border-white/10
+                                outline-none
+                                text-white
+                            "
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div>
+
+                        <label class="text-sm text-slate-400">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            value="john@example.com"
+                            class="
+                                input-glow
+                                w-full mt-2
+                                px-4 py-3.5
+                                rounded-2xl
+                                bg-slate-950/70
+                                border border-white/10
+                                outline-none
+                                text-white
+                            "
+                        >
+
+                    </div>
+
+
+                    <!-- ABOUT -->
+
+                    <div>
+
+                        <div class="flex justify-between">
+
+                            <label class="text-sm text-slate-400">
+                                About
+                            </label>
+
+                            <span class="text-xs text-slate-600">
+                                Professional summary
+                            </span>
+
+                        </div>
+
+                        <textarea
+                            class="
+                                input-glow
+                                w-full mt-2
+                                px-4 py-3.5
+                                h-36
+                                rounded-2xl
+                                bg-slate-950/70
+                                border border-white/10
+                                outline-none
+                                text-white
+                                resize-none
+                            "
+                        >Passionate frontend developer with 5+ years of experience building modern web applications.</textarea>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button class="
+                        save-button
+                        group
+                        w-full
+                        py-4
+                        rounded-2xl
+                        bg-gradient-to-r
+                        from-purple-600
+                        via-indigo-600
+                        to-cyan-500
+                        bg-[length:200%_200%]
+                        hover:bg-right
+                        font-bold
+                        shadow-xl
+                        shadow-purple-900/30
+                        transition-all
+                        duration-500
+                        hover:-translate-y-1
+                        active:scale-[.98]
+                    ">
+
+                        <span class="relative z-10 flex items-center justify-center gap-2">
+
+                            <span>Save Resume</span>
+
+                            <span class="
+                                group-hover:translate-x-1
+                                transition-transform
+                            ">
+                                →
+                            </span>
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESUME PREVIEW -->
+
+            <div class="
+                resume-card
+                relative
+                bg-white
+                text-slate-900
+                rounded-[2rem]
+                p-7 sm:p-9
+                shadow-2xl
+                shadow-black/30
+                animate-slide-up
+            " style="animation-delay:.3s">
+
+
+                <!-- DECORATION -->
+
+                <div class="
+                    absolute
+                    top-0 right-0
+                    w-40 h-40
+                    rounded-full
+                    bg-purple-200/40
+                    blur-3xl
+                    pointer-events-none
+                "></div>
+
+
+                <!-- HEADER -->
+
+                <div class="
+                    relative
+                    border-b
+                    border-slate-200
+                    pb-7
+                ">
+
+                    <div class="
+                        flex
+                        items-start
+                        justify-between
+                        gap-4
+                    ">
+
+                        <div>
+
+                            <p class="
+                                text-xs
+                                font-bold
+                                uppercase
+                                tracking-[.2em]
+                                text-purple-500
+                                mb-2
+                            ">
+                                Resume
+                            </p>
+
+                            <h2 class="
+                                text-4xl
+                                sm:text-5xl
+                                font-black
+                                tracking-tight
+                            ">
+                                John Doe
+                            </h2>
+
+                            <p class="
+                                text-transparent
+                                bg-clip-text
+                                bg-gradient-to-r
+                                from-purple-600
+                                to-indigo-600
+                                font-bold
+                                text-lg
+                                mt-2
+                            ">
+                                Senior Frontend Developer
+                            </p>
+
+                        </div>
+
+
+                        <div class="
+                            hidden sm:flex
+                            w-16 h-16
+                            rounded-2xl
+                            bg-gradient-to-br
+                            from-purple-600
+                            to-indigo-600
+                            text-white
+                            items-center justify-center
+                            font-black
+                            text-xl
+                            shadow-lg
+                            shadow-purple-500/20
+                        ">
+                            JD
+                        </div>
+
+                    </div>
+
+
+                    <div class="
+                        flex flex-wrap
+                        gap-x-5
+                        gap-y-2
+                        text-sm
+                        text-slate-500
+                        mt-5
+                    ">
+
+                        <span>
+                            ✉ john@example.com
+                        </span>
+
+                        <span>
+                            📍 Bengaluru, India
+                        </span>
+
+                    </div>
 
                 </div>
 
 
-                <div>
+                <!-- PROFILE -->
 
-                    <label class="text-sm
-                                  text-slate-400">
+                <section class="mt-8">
 
-                        Email
+                    <h3 class="
+                        flex
+                        items-center
+                        gap-3
+                        text-xs
+                        uppercase
+                        tracking-[.2em]
+                        text-purple-600
+                        font-black
+                    ">
 
-                    </label>
+                        <span class="
+                            w-8 h-[2px]
+                            bg-gradient-to-r
+                            from-purple-600
+                            to-indigo-500
+                        "></span>
 
-                    <input
-                        value="john@example.com"
-                        class="w-full mt-2
-                               px-4 py-3
-                               rounded-xl
-                               bg-slate-900
-                               border border-white/10
-                               outline-none
-                               focus:border-purple-500">
+                        Profile
+
+                    </h3>
+
+                    <p class="
+                        text-sm
+                        text-slate-600
+                        leading-7
+                        mt-4
+                    ">
+
+                        Passionate frontend developer with 5+
+                        years of experience building modern,
+                        scalable and beautiful web applications.
+
+                    </p>
+
+                </section>
+
+
+                <!-- EXPERIENCE -->
+
+                <section class="mt-8">
+
+                    <h3 class="
+                        flex
+                        items-center
+                        gap-3
+                        text-xs
+                        uppercase
+                        tracking-[.2em]
+                        text-purple-600
+                        font-black
+                    ">
+
+                        <span class="
+                            w-8 h-[2px]
+                            bg-gradient-to-r
+                            from-purple-600
+                            to-indigo-500
+                        "></span>
+
+                        Experience
+
+                    </h3>
+
+
+                    <div class="
+                        mt-5
+                        pl-5
+                        border-l-2
+                        border-purple-200
+                    ">
+
+                        <h4 class="font-bold text-lg">
+                            Senior Frontend Developer
+                        </h4>
+
+                        <p class="
+                            text-sm
+                            font-medium
+                            text-purple-600
+                            mt-1
+                        ">
+                            Tech Company · 2022 — Present
+                        </p>
+
+                        <p class="
+                            text-sm
+                            text-slate-600
+                            mt-3
+                            leading-7
+                        ">
+
+                            Developed scalable React applications,
+                            improved performance and collaborated
+                            with designers to build modern products.
+
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- SKILLS -->
+
+                <section class="mt-8">
+
+                    <h3 class="
+                        flex
+                        items-center
+                        gap-3
+                        text-xs
+                        uppercase
+                        tracking-[.2em]
+                        text-purple-600
+                        font-black
+                    ">
+
+                        <span class="
+                            w-8 h-[2px]
+                            bg-gradient-to-r
+                            from-purple-600
+                            to-indigo-500
+                        "></span>
+
+                        Skills
+
+                    </h3>
+
+
+                    <div class="
+                        flex flex-wrap
+                        gap-2.5
+                        mt-5
+                    ">
+
+                        <span class="
+                            skill
+                            px-4 py-2
+                            bg-purple-50
+                            text-purple-700
+                            border border-purple-100
+                            rounded-xl
+                            text-xs
+                            font-bold
+                        ">
+                            React
+                        </span>
+
+                        <span class="
+                            skill
+                            px-4 py-2
+                            bg-indigo-50
+                            text-indigo-700
+                            border border-indigo-100
+                            rounded-xl
+                            text-xs
+                            font-bold
+                        ">
+                            JavaScript
+                        </span>
+
+                        <span class="
+                            skill
+                            px-4 py-2
+                            bg-cyan-50
+                            text-cyan-700
+                            border border-cyan-100
+                            rounded-xl
+                            text-xs
+                            font-bold
+                        ">
+                            Tailwind
+                        </span>
+
+                        <span class="
+                            skill
+                            px-4 py-2
+                            bg-fuchsia-50
+                            text-fuchsia-700
+                            border border-fuchsia-100
+                            rounded-xl
+                            text-xs
+                            font-bold
+                        ">
+                            TypeScript
+                        </span>
+
+                    </div>
+
+                </section>
+
+
+                <!-- FOOTER -->
+
+                <div class="
+                    mt-10
+                    pt-5
+                    border-t
+                    border-slate-100
+                    flex
+                    justify-between
+                    text-[10px]
+                    uppercase
+                    tracking-widest
+                    text-slate-400
+                ">
+
+                    <span>
+                        Professional Resume
+                    </span>
+
+                    <span>
+                        2026
+                    </span>
 
                 </div>
-
-
-                <div>
-
-                    <label class="text-sm
-                                  text-slate-400">
-
-                        About
-
-                    </label>
-
-                    <textarea
-                        class="w-full mt-2
-                               px-4 py-3
-                               h-32
-                               rounded-xl
-                               bg-slate-900
-                               border border-white/10
-                               outline-none
-                               focus:border-purple-500">Passionate frontend developer with 5+ years of experience building modern web applications.</textarea>
-
-                </div>
-
-
-                <button class="w-full
-                               py-3
-                               rounded-xl
-                               bg-gradient-to-r
-                               from-purple-600
-                               to-indigo-600
-                               font-bold
-                               hover:scale-[1.01]
-                               transition">
-
-                    Save Resume
-
-                </button>
 
             </div>
 
         </div>
 
+    </main>
 
-        <!-- RESUME PREVIEW -->
-
-        <div class="bg-white
-                    text-slate-900
-                    rounded-3xl
-                    p-8
-                    shadow-2xl">
-
-            <div class="border-b
-                        border-slate-200
-                        pb-6">
-
-                <h2 class="text-3xl font-bold">
-                    John Doe
-                </h2>
-
-                <p class="text-purple-600
-                          font-semibold
-                          mt-1">
-
-                    Senior Frontend Developer
-
-                </p>
-
-                <p class="text-sm text-slate-500 mt-2">
-                    john@example.com · Bengaluru, India
-                </p>
-
-            </div>
-
-
-            <section class="mt-7">
-
-                <h3 class="text-sm
-                           uppercase
-                           tracking-widest
-                           text-purple-600
-                           font-bold">
-
-                    Profile
-
-                </h3>
-
-                <p class="text-sm
-                          text-slate-600
-                          leading-relaxed
-                          mt-3">
-
-                    Passionate frontend developer with 5+
-                    years of experience building modern,
-                    scalable and beautiful web applications.
-
-                </p>
-
-            </section>
-
-
-            <section class="mt-7">
-
-                <h3 class="text-sm
-                           uppercase
-                           tracking-widest
-                           text-purple-600
-                           font-bold">
-
-                    Experience
-
-                </h3>
-
-                <div class="mt-4">
-
-                    <h4 class="font-bold">
-                        Senior Frontend Developer
-                    </h4>
-
-                    <p class="text-sm text-slate-500">
-                        Tech Company · 2022 — Present
-                    </p>
-
-                    <p class="text-sm
-                              text-slate-600
-                              mt-2
-                              leading-relaxed">
-
-                        Developed scalable React applications,
-                        improved performance and collaborated
-                        with designers to build modern products.
-
-                    </p>
-
-                </div>
-
-            </section>
-
-
-            <section class="mt-7">
-
-                <h3 class="text-sm
-                           uppercase
-                           tracking-widest
-                           text-purple-600
-                           font-bold">
-
-                    Skills
-
-                </h3>
-
-                <div class="flex flex-wrap gap-2 mt-4">
-
-                    <span class="px-3 py-1
-                                 bg-purple-100
-                                 text-purple-700
-                                 rounded-lg
-                                 text-xs">
-
-                        React
-
-                    </span>
-
-                    <span class="px-3 py-1
-                                 bg-purple-100
-                                 text-purple-700
-                                 rounded-lg
-                                 text-xs">
-
-                        JavaScript
-
-                    </span>
-
-                    <span class="px-3 py-1
-                                 bg-purple-100
-                                 text-purple-700
-                                 rounded-lg
-                                 text-xs">
-
-                        Tailwind
-
-                    </span>
-
-                    <span class="px-3 py-1
-                                 bg-purple-100
-                                 text-purple-700
-                                 rounded-lg
-                                 text-xs">
-
-                        TypeScript
-
-                    </span>
-
-                </div>
-
-            </section>
-
-        </div>
-
-    </div>
-
-</main>
+</body>
+</html>
