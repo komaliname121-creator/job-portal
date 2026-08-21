@@ -1,127 +1,870 @@
-<main class="max-w-7xl mx-auto px-6 py-20">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="max-w-4xl">
+    <title>About HireX</title>
 
-        <p class="text-purple-400
-                  font-semibold
-                  uppercase
-                  tracking-widest
-                  text-sm">
+    <script src="https://cdn.tailwindcss.com"></script>
 
-            About HireX
+    <style>
+        /* =========================================
+           NEXT LEVEL ANIMATIONS
+        ========================================= */
 
-        </p>
+        @keyframes float {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
 
-        <h1 class="text-5xl
-                   md:text-7xl
-                   font-extrabold
-                   mt-4
-                   leading-tight">
+            50% {
+                transform: translate3d(30px, -25px, 0) scale(1.08);
+            }
+        }
 
-            We connect
+        @keyframes floatReverse {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
 
-            <span class="bg-gradient-to-r
-                         from-purple-400
-                         to-cyan-400
-                         bg-clip-text
-                         text-transparent">
+            50% {
+                transform: translate3d(-35px, 30px, 0) scale(1.1);
+            }
+        }
 
-                ambitious people
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(45px);
+            }
 
-            </span>
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-            with extraordinary companies.
+        @keyframes revealLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-45px);
+            }
 
-        </h1>
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-        <p class="text-lg
-                  text-slate-400
-                  leading-relaxed
-                  mt-7
-                  max-w-2xl">
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
 
-            HireX is a modern career platform designed to
-            make finding the right opportunity simpler,
-            faster and more human.
+            50% {
+                background-position: 100% 50%;
+            }
 
-        </p>
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 rgba(139,92,246,0);
+            }
+
+            50% {
+                box-shadow: 0 0 45px rgba(139,92,246,.18);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-150%) skewX(-20deg);
+            }
+
+            100% {
+                transform: translateX(350%) skewX(-20deg);
+            }
+        }
+
+        @keyframes orbit {
+            from {
+                transform: rotate(0deg) translateX(90px) rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg) translateX(90px) rotate(-360deg);
+            }
+        }
+
+        .float {
+            animation: float 9s ease-in-out infinite;
+        }
+
+        .float-reverse {
+            animation: floatReverse 11s ease-in-out infinite;
+        }
+
+        .reveal {
+            animation: reveal .8s cubic-bezier(.2,.8,.2,1) both;
+        }
+
+        .reveal-left {
+            animation: revealLeft .8s cubic-bezier(.2,.8,.2,1) both;
+        }
+
+        .gradient-animation {
+            background-size: 300% 300%;
+            animation: gradientMove 5s ease infinite;
+        }
+
+        .glow-pulse {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        /* =========================================
+           GLASS
+        ========================================= */
+
+        .glass {
+            background: rgba(255,255,255,.045);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+        }
+
+        /* =========================================
+           FEATURE CARDS
+        ========================================= */
+
+        .feature-card {
+            position: relative;
+            overflow: hidden;
+
+            transition:
+                transform .5s cubic-bezier(.2,.8,.2,1),
+                border-color .4s ease,
+                box-shadow .5s ease;
+        }
+
+        .feature-card::before {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    transparent 20%,
+                    rgba(255,255,255,.07) 45%,
+                    transparent 70%
+                );
+
+            transform: translateX(-120%) skewX(-20deg);
+
+            pointer-events: none;
+        }
+
+        .feature-card:hover::before {
+            animation: shine 1s ease;
+        }
+
+        .feature-card:hover {
+            transform:
+                translateY(-12px)
+                scale(1.025);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,.3),
+                0 0 45px rgba(139,92,246,.10);
+        }
+
+        .feature-icon {
+            transition:
+                transform .45s cubic-bezier(.2,.8,.2,1),
+                box-shadow .4s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform:
+                rotate(-8deg)
+                scale(1.15);
+
+            box-shadow:
+                0 15px 35px rgba(139,92,246,.18);
+        }
+
+        /* =========================================
+           GRID BACKGROUND
+        ========================================= */
+
+        .grid-background {
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,.035) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.035) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+        }
+
+        /* =========================================
+           TEXT
+        ========================================= */
+
+        .hero-gradient {
+            background:
+                linear-gradient(
+                    90deg,
+                    #c084fc,
+                    #818cf8,
+                    #22d3ee,
+                    #c084fc
+                );
+
+            background-size: 300% 100%;
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            animation: gradientMove 5s ease infinite;
+        }
+
+        /* =========================================
+           ORBIT DECORATION
+        ========================================= */
+
+        .orbit {
+            animation: orbit 10s linear infinite;
+        }
+    </style>
+</head>
+
+
+<body class="
+    min-h-screen
+    bg-[#050816]
+    text-white
+    overflow-x-hidden
+">
+
+
+    <!-- ==========================================
+         ANIMATED BACKGROUND
+    =========================================== -->
+
+    <div class="
+        fixed
+        inset-0
+        pointer-events-none
+        overflow-hidden
+    ">
+
+        <!-- Purple Orb -->
+
+        <div class="
+            float
+            absolute
+            -top-48
+            -left-48
+            w-[38rem]
+            h-[38rem]
+            rounded-full
+            bg-purple-600/20
+            blur-3xl
+        "></div>
+
+
+        <!-- Cyan Orb -->
+
+        <div class="
+            float-reverse
+            absolute
+            top-[25%]
+            -right-48
+            w-[35rem]
+            h-[35rem]
+            rounded-full
+            bg-cyan-500/15
+            blur-3xl
+        "></div>
+
+
+        <!-- Pink Orb -->
+
+        <div class="
+            float
+            absolute
+            bottom-[-18rem]
+            left-[30%]
+            w-[34rem]
+            h-[34rem]
+            rounded-full
+            bg-fuchsia-600/10
+            blur-3xl
+        "></div>
+
+
+        <!-- Center glow -->
+
+        <div class="
+            absolute
+            inset-0
+            bg-[radial-gradient(circle_at_50%_0%,rgba(139,92,246,.16),transparent_45%)]
+        "></div>
+
+
+        <!-- Grid -->
+
+        <div class="
+            grid-background
+            absolute
+            inset-0
+            opacity-30
+        "></div>
 
     </div>
 
 
-    <div class="grid md:grid-cols-3 gap-6 mt-20">
+    <!-- ==========================================
+         MAIN
+    =========================================== -->
 
-        <div class="p-8
-                    rounded-3xl
-                    bg-white/5
-                    border border-white/10
-                    hover:-translate-y-2
-                    hover:border-purple-500/30
-                    transition">
+    <main class="
+        relative
+        max-w-7xl
+        mx-auto
+        px-5
+        sm:px-6
+        py-16
+        lg:py-24
+    ">
 
-            <div class="text-4xl">
-                ⚡
+
+        <!-- ======================================
+             HERO
+        ======================================= -->
+
+        <section
+            class="
+                relative
+                max-w-5xl
+                reveal-left
+            "
+        >
+
+
+            <!-- Badge -->
+
+            <div class="
+                inline-flex
+                items-center
+                gap-2
+                px-4
+                py-2
+                rounded-full
+                bg-purple-500/10
+                border border-purple-400/20
+                text-purple-300
+                text-xs
+                font-bold
+                uppercase
+                tracking-[.2em]
+                glow-pulse
+            ">
+
+                <span class="
+                    w-2
+                    h-2
+                    rounded-full
+                    bg-purple-400
+                    shadow-[0_0_15px_#a855f7]
+                    animate-pulse
+                "></span>
+
+                About HireX
+
             </div>
 
-            <h3 class="text-xl font-bold mt-6">
-                Fast
-            </h3>
 
-            <p class="text-slate-500 mt-3 leading-relaxed">
-                Find relevant opportunities without wasting
-                hours searching through irrelevant listings.
+            <!-- Heading -->
+
+            <h1 class="
+                text-5xl
+                sm:text-6xl
+                md:text-7xl
+                lg:text-8xl
+                font-black
+                tracking-tight
+                leading-[.98]
+                mt-7
+            ">
+
+                We connect
+
+                <span class="hero-gradient">
+
+                    ambitious people
+
+                </span>
+
+                with extraordinary companies.
+
+            </h1>
+
+
+            <!-- Description -->
+
+            <p class="
+                text-base
+                sm:text-lg
+                md:text-xl
+                text-slate-400
+                leading-relaxed
+                mt-8
+                max-w-3xl
+            ">
+
+                HireX is a modern career platform designed to
+                make finding the right opportunity simpler,
+                faster and more human.
+
             </p>
 
-        </div>
+
+            <!-- CTA -->
+
+            <div class="
+                flex
+                flex-wrap
+                gap-4
+                mt-9
+            ">
+
+                <button class="
+                    group
+                    relative
+                    overflow-hidden
+                    px-6
+                    py-3.5
+                    rounded-2xl
+                    bg-gradient-to-r
+                    from-purple-600
+                    via-indigo-600
+                    to-cyan-500
+                    gradient-animation
+                    font-bold
+                    shadow-xl
+                    shadow-purple-900/30
+                    hover:-translate-y-1
+                    transition-all
+                ">
+
+                    <span class="relative z-10">
+                        Explore Opportunities
+                    </span>
+
+                </button>
 
 
-        <div class="p-8
-                    rounded-3xl
+                <button class="
+                    px-6
+                    py-3.5
+                    rounded-2xl
                     bg-white/5
                     border border-white/10
-                    hover:-translate-y-2
-                    hover:border-cyan-500/30
-                    transition">
+                    text-slate-300
+                    font-semibold
+                    hover:bg-white/10
+                    hover:border-purple-400/30
+                    hover:-translate-y-1
+                    transition-all
+                ">
 
-            <div class="text-4xl">
-                🎯
+                    Learn More →
+
+                </button>
+
             </div>
 
-            <h3 class="text-xl font-bold mt-6">
-                Relevant
-            </h3>
 
-            <p class="text-slate-500 mt-3 leading-relaxed">
-                Discover jobs that match your skills,
-                experience and career goals.
-            </p>
+            <!-- Decorative orbit -->
 
-        </div>
+            <div class="
+                hidden
+                lg:block
+                absolute
+                -right-10
+                top-16
+                w-8
+                h-8
+                rounded-full
+                bg-cyan-400
+                shadow-[0_0_35px_#22d3ee]
+                orbit
+            "></div>
+
+        </section>
 
 
-        <div class="p-8
-                    rounded-3xl
-                    bg-white/5
+        <!-- ======================================
+             FEATURE CARDS
+        ======================================= -->
+
+        <section class="
+            grid
+            md:grid-cols-3
+            gap-5
+            lg:gap-7
+            mt-24
+        ">
+
+
+            <!-- FAST -->
+
+            <div
+                class="
+                    feature-card
+                    glass
+                    p-7
+                    sm:p-8
+                    rounded-[2rem]
                     border border-white/10
-                    hover:-translate-y-2
-                    hover:border-purple-500/30
-                    transition">
+                    reveal
+                "
+                style="animation-delay:.15s"
+            >
 
-            <div class="text-4xl">
-                🚀
+                <div class="
+                    feature-icon
+                    w-16
+                    h-16
+                    rounded-2xl
+                    bg-gradient-to-br
+                    from-purple-500/20
+                    to-indigo-500/10
+                    border border-purple-400/10
+                    flex
+                    items-center
+                    justify-center
+                    text-3xl
+                ">
+
+                    ⚡
+
+                </div>
+
+
+                <div class="
+                    text-xs
+                    uppercase
+                    tracking-[.2em]
+                    text-purple-400
+                    font-bold
+                    mt-7
+                ">
+                    01
+                </div>
+
+
+                <h3 class="
+                    text-2xl
+                    font-bold
+                    mt-2
+                ">
+                    Fast
+                </h3>
+
+
+                <p class="
+                    text-slate-500
+                    mt-4
+                    leading-7
+                ">
+
+                    Find relevant opportunities without wasting
+                    hours searching through irrelevant listings.
+
+                </p>
+
+
+                <div class="
+                    mt-7
+                    text-purple-400
+                    text-sm
+                    font-semibold
+                    group
+                ">
+
+                    Find jobs faster
+
+                    <span class="
+                        inline-block
+                        ml-1
+                        transition-transform
+                        group-hover:translate-x-2
+                    ">
+                        →
+                    </span>
+
+                </div>
+
             </div>
 
-            <h3 class="text-xl font-bold mt-6">
-                Career Focused
-            </h3>
 
-            <p class="text-slate-500 mt-3 leading-relaxed">
-                Build your profile, create your resume and
-                manage your entire job search in one place.
-            </p>
+            <!-- RELEVANT -->
 
-        </div>
+            <div
+                class="
+                    feature-card
+                    glass
+                    p-7
+                    sm:p-8
+                    rounded-[2rem]
+                    border border-white/10
+                    reveal
+                "
+                style="animation-delay:.3s"
+            >
 
-    </div>
+                <div class="
+                    feature-icon
+                    w-16
+                    h-16
+                    rounded-2xl
+                    bg-gradient-to-br
+                    from-cyan-500/20
+                    to-blue-500/10
+                    border border-cyan-400/10
+                    flex
+                    items-center
+                    justify-center
+                    text-3xl
+                ">
 
-</main>
+                    🎯
+
+                </div>
+
+
+                <div class="
+                    text-xs
+                    uppercase
+                    tracking-[.2em]
+                    text-cyan-400
+                    font-bold
+                    mt-7
+                ">
+                    02
+                </div>
+
+
+                <h3 class="
+                    text-2xl
+                    font-bold
+                    mt-2
+                ">
+                    Relevant
+                </h3>
+
+
+                <p class="
+                    text-slate-500
+                    mt-4
+                    leading-7
+                ">
+
+                    Discover jobs that match your skills,
+                    experience and career goals.
+
+                </p>
+
+
+                <div class="
+                    mt-7
+                    text-cyan-400
+                    text-sm
+                    font-semibold
+                ">
+
+                    Find your match →
+
+                </div>
+
+            </div>
+
+
+            <!-- CAREER FOCUSED -->
+
+            <div
+                class="
+                    feature-card
+                    glass
+                    p-7
+                    sm:p-8
+                    rounded-[2rem]
+                    border border-white/10
+                    reveal
+                "
+                style="animation-delay:.45s"
+            >
+
+                <div class="
+                    feature-icon
+                    w-16
+                    h-16
+                    rounded-2xl
+                    bg-gradient-to-br
+                    from-fuchsia-500/20
+                    to-purple-500/10
+                    border border-fuchsia-400/10
+                    flex
+                    items-center
+                    justify-center
+                    text-3xl
+                ">
+
+                    🚀
+
+                </div>
+
+
+                <div class="
+                    text-xs
+                    uppercase
+                    tracking-[.2em]
+                    text-fuchsia-400
+                    font-bold
+                    mt-7
+                ">
+                    03
+                </div>
+
+
+                <h3 class="
+                    text-2xl
+                    font-bold
+                    mt-2
+                ">
+                    Career Focused
+                </h3>
+
+
+                <p class="
+                    text-slate-500
+                    mt-4
+                    leading-7
+                ">
+
+                    Build your profile, create your resume and
+                    manage your entire job search in one place.
+
+                </p>
+
+
+                <div class="
+                    mt-7
+                    text-fuchsia-400
+                    text-sm
+                    font-semibold
+                ">
+
+                    Build your career →
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             BOTTOM STATEMENT
+        ======================================= -->
+
+        <section class="
+            relative
+            mt-20
+            p-8
+            sm:p-10
+            rounded-[2rem]
+            overflow-hidden
+            border border-white/10
+            bg-gradient-to-r
+            from-purple-500/[.08]
+            via-indigo-500/[.05]
+            to-cyan-500/[.08]
+            reveal
+        ">
+
+            <div class="
+                absolute
+                -right-20
+                -top-20
+                w-60
+                h-60
+                rounded-full
+                bg-purple-500/10
+                blur-3xl
+            "></div>
+
+
+            <div class="relative">
+
+                <p class="
+                    text-sm
+                    uppercase
+                    tracking-[.2em]
+                    text-purple-400
+                    font-bold
+                ">
+                    Your next chapter
+                </p>
+
+
+                <h2 class="
+                    text-3xl
+                    sm:text-4xl
+                    font-black
+                    mt-3
+                ">
+
+                    Your next opportunity
+                    <span class="hero-gradient">
+                        starts here.
+                    </span>
+
+                </h2>
+
+
+                <p class="
+                    text-slate-500
+                    mt-4
+                    max-w-2xl
+                    leading-relaxed
+                ">
+
+                    From discovering opportunities to preparing
+                    your resume and tracking applications, HireX
+                    gives you the tools to move your career forward.
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
