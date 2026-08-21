@@ -1,161 +1,665 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Jobify - About</title>
+    <title>Jobify - About Us</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f7fb;
+            color: #1e293b;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            width: 100%;
+            height: 75px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* LOGO */
+
+        .logo {
+            text-decoration: none;
+            font-size: 30px;
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .logo span {
+            color: #7c3aed;
+        }
+
+        /* NAV LINKS */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-size: 16px;
+            font-weight: 600;
+
+            padding: 10px 5px;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #4f46e5;
+        }
+
+        /* ACTIVE ABOUT */
+
+        .nav-links .active {
+            color: #4f46e5;
+            border-bottom: 3px solid #4f46e5;
+        }
+
+        /* NAV BUTTONS */
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border: 2px solid #4f46e5;
+            border-radius: 8px;
+
+            background-color: white;
+            color: #4f46e5;
+
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .login-btn:hover {
+            background-color: #eef2ff;
+        }
+
+        .signup-btn {
+            padding: 10px 20px;
+            border: 2px solid #4f46e5;
+            border-radius: 8px;
+
+            background-color: #4f46e5;
+            color: white;
+
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .signup-btn:hover {
+            background-color: #4338ca;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+
+            color: white;
+            text-align: center;
+
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #e0e7ff;
+            max-width: 650px;
+            margin: auto;
+            line-height: 1.7;
+        }
+
+
+        /* ================= ABOUT ================= */
+
+        .about {
+            width: 90%;
+            max-width: 1200px;
+            margin: 70px auto;
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 38px;
+            margin-bottom: 20px;
+        }
+
+        .about-text h2 span {
+            color: #4f46e5;
+        }
+
+        .about-text p {
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        /* ABOUT CARD */
+
+        .about-card {
+            background: linear-gradient(
+                135deg,
+                #4f46e5,
+                #7c3aed
+            );
+
+            color: white;
+
+            padding: 50px;
+            border-radius: 25px;
+
+            box-shadow: 0 20px 40px rgba(79, 70, 229, 0.25);
+        }
+
+        .about-card .icon {
+            font-size: 55px;
+            margin-bottom: 25px;
+        }
+
+        .about-card h3 {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .about-card p {
+            color: #e0e7ff;
+            line-height: 1.7;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            background-color: white;
+            padding: 80px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .section-title p {
+            color: #64748b;
+        }
+
+        .feature-container {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature-card {
+            padding: 35px;
+            background-color: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+
+            background-color: #eef2ff;
+
+            border-radius: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            background-color: #0f172a;
+            color: white;
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #818cf8;
+        }
+
+        .footer p {
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .nav-buttons {
+                display: none;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                height: auto;
+                padding: 18px 0;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 18px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .hero {
+                padding: 70px 20px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .about {
+                margin: 50px auto;
+            }
+
+            .about-text h2 {
+                font-size: 30px;
+            }
+
+            .about-card {
+                padding: 35px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body class="bg-gray-100">
 
-    <!-- ================= NAVBAR ================= -->
-
-    <header class="bg-white shadow-lg">
-
-        <nav class="max-w-7xl mx-auto px-6 py-4">
-
-            <div class="flex items-center justify-between">
-
-                <!-- LOGO -->
-
-                <div>
-                    <a href="index.html"
-                       class="text-3xl font-bold">
-
-                        <span class="text-blue-600">Job</span><span class="text-purple-600">ify</span>
-
-                    </a>
-                </div>
+<body>
 
 
-                <!-- NAVBAR LINKS -->
+    <!-- ================================================= -->
+    <!--                    NAVBAR                        -->
+    <!-- ================================================= -->
 
-                <div class="flex items-center gap-8">
+    <header class="navbar">
 
-                    <a href="index.html"
-                       class="text-gray-700 hover:text-blue-600 font-semibold">
-                        Home
-                    </a>
-
-                    <a href="about.html"
-                       class="text-blue-600 font-bold">
-                        About
-                    </a>
-
-                    <a href="application.html"
-                       class="text-gray-700 hover:text-blue-600 font-semibold">
-                        Applications
-                    </a>
-
-                    <a href="profile.html"
-                       class="text-gray-700 hover:text-blue-600 font-semibold">
-                        Profile
-                    </a>
-
-                    <a href="resume.html"
-                       class="text-gray-700 hover:text-blue-600 font-semibold">
-                        Resume
-                    </a>
-
-                </div>
+        <div class="nav-container">
 
 
-                <!-- BUTTONS -->
+            <!-- LOGO -->
 
-                <div class="flex items-center gap-3">
+            <a href="index.html" class="logo">
 
-                    <button
-                        class="border-2 border-blue-600 text-blue-600 px-5 py-2 rounded-lg font-semibold">
+                Job<span>ify</span>
 
-                        Login
+            </a>
 
-                    </button>
 
-                    <button
-                        class="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold">
+            <!-- NAVIGATION -->
 
-                        Sign Up
+            <div class="nav-links">
 
-                    </button>
+                <a href="index.html">
+                    Home
+                </a>
 
-                </div>
+                <a href="about.html" class="active">
+                    About
+                </a>
+
+                <a href="application.html">
+                    Applications
+                </a>
+
+                <a href="profile.html">
+                    Profile
+                </a>
+
+                <a href="resume.html">
+                    Resume
+                </a>
 
             </div>
 
-        </nav>
+
+            <!-- BUTTONS -->
+
+            <div class="nav-buttons">
+
+                <button class="login-btn">
+                    Login
+                </button>
+
+                <button class="signup-btn">
+                    Sign Up
+                </button>
+
+            </div>
+
+
+        </div>
 
     </header>
 
 
-    <!-- ================= PAGE CONTENT ================= -->
+    <!-- ================================================= -->
+    <!--                     HERO                          -->
+    <!-- ================================================= -->
 
-    <section class="bg-gradient-to-r from-blue-600 to-purple-600">
+    <section class="hero">
 
-        <div class="max-w-7xl mx-auto px-6 py-24 text-center text-white">
+        <h1>
+            About Jobify
+        </h1>
 
-            <h1 class="text-5xl font-bold">
-                About Jobify
-            </h1>
+        <p>
 
-            <p class="mt-5 text-xl">
-                Find your dream job and build your career.
-            </p>
+            Connecting talented people with amazing
+            career opportunities.
+
+        </p>
+
+    </section>
+
+
+    <!-- ================================================= -->
+    <!--                     ABOUT                         -->
+    <!-- ================================================= -->
+
+    <section class="about">
+
+        <div class="about-container">
+
+
+            <div class="about-text">
+
+                <h2>
+
+                    We help you find your
+                    <span>dream job.</span>
+
+                </h2>
+
+                <p>
+
+                    Jobify is a modern job portal designed to make
+                    job searching simple, fast and effective.
+
+                </p>
+
+                <p>
+
+                    Candidates can search for jobs, create their
+                    professional profile, build resumes and track
+                    their applications from one place.
+
+                </p>
+
+                <p>
+
+                    Our goal is to connect talented professionals
+                    with companies where they can build successful
+                    careers.
+
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Your Career Starts Here
+                </h3>
+
+                <p>
+
+                    Discover new opportunities, showcase your
+                    skills and take the next step toward your
+                    career goals.
+
+                </p>
+
+            </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- ABOUT CONTENT -->
+    <!-- ================================================= -->
+    <!--                    FEATURES                       -->
+    <!-- ================================================= -->
 
-    <section class="max-w-7xl mx-auto px-6 py-16">
+    <section class="features">
 
-        <div class="bg-white rounded-2xl shadow-md p-10">
+        <div class="section-title">
 
-            <h2 class="text-3xl font-bold text-gray-800">
-                Who We Are
+            <h2>
+                Why Choose Jobify?
             </h2>
 
-            <p class="text-gray-600 mt-5 leading-8">
-
-                Jobify is a modern job portal that connects job seekers
-                with companies. Our platform helps candidates search for
-                jobs, create resumes, manage profiles and track their
-                applications.
-
+            <p>
+                Everything you need for your career journey.
             </p>
+
+        </div>
+
+
+        <div class="feature-container">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔍
+                </div>
+
+                <h3>
+                    Find Jobs
+                </h3>
+
+                <p>
+
+                    Search thousands of jobs based on
+                    your skills, location and experience.
+
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Build Resume
+                </h3>
+
+                <p>
+
+                    Create a professional resume that
+                    helps you stand out to employers.
+
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Track Applications
+                </h3>
+
+                <p>
+
+                    Keep track of your job applications
+                    and know exactly where you stand.
+
+                </p>
+
+            </div>
+
 
         </div>
 
     </section>
 
 
-    <!-- FOOTER -->
+    <!-- ================================================= -->
+    <!--                    FOOTER                         -->
+    <!-- ================================================= -->
 
-    <footer class="bg-gray-900 text-white">
+    <footer class="footer">
 
-        <div class="max-w-7xl mx-auto px-6 py-8 text-center">
-
-            <h2 class="text-2xl font-bold">
-                Jobify
-            </h2>
-
-            <p class="text-gray-400 mt-2">
-                Find your dream job today.
-            </p>
-
-            <p class="text-gray-500 mt-5">
-                © 2026 Jobify. All Rights Reserved.
-            </p>
-
+        <div class="footer-logo">
+            Jobify
         </div>
+
+        <p>
+            Find your dream job. Build your future.
+        </p>
+
+        <p>
+            © 2026 Jobify. All Rights Reserved.
+        </p>
 
     </footer>
 
+
 </body>
+
 </html>
