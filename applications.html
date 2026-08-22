@@ -1,189 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CareerHub | Applications</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
+<nav class="fixed top-0 left-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-<body class="bg-slate-50 text-slate-800">
+        <a href="index.html" class="group flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-violet-600
+                        flex items-center justify-center text-white font-black
+                        transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
+                J
+            </div>
+            <span class="text-xl font-bold text-white">
+                Job<span class="text-blue-400">Sphere</span>
+            </span>
+        </a>
 
-  <!-- Navbar -->
-  <nav class="bg-white border-b sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="hidden md:flex items-center gap-2">
 
-      <a href="about.html" class="flex items-center gap-2">
-        <div class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold text-xl">C</div>
-        <span class="text-2xl font-bold">Career<span class="text-indigo-600">Hub</span></span>
-      </a>
+            <a href="index.html"
+               class="px-5 py-2.5 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-300 hover:-translate-y-1">
+                Home
+            </a>
 
-      <div class="hidden md:flex gap-8 text-sm font-medium">
-        <a href="about.html" class="hover:text-indigo-600">About</a>
-        <a href="profile.html" class="hover:text-indigo-600">Profile</a>
-        <a href="applications.html" class="text-indigo-600">Applications</a>
-        <a href="resume.html" class="hover:text-indigo-600">Resume</a>
-      </div>
+            <a href="about.html"
+               class="px-5 py-2.5 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-300 hover:-translate-y-1">
+                About
+            </a>
 
-      <button class="md:hidden text-2xl">☰</button>
-    </div>
-  </nav>
+            <a href="applications.html"
+               class="px-5 py-2.5 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-400/20 transition-all duration-300 hover:bg-blue-500 hover:text-white">
+                Applications
+            </a>
 
-  <main class="max-w-7xl mx-auto px-6 py-10">
+            <a href="profile.html"
+               class="px-5 py-2.5 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-300 hover:-translate-y-1">
+                Profile
+            </a>
 
-    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-      <div>
-        <h1 class="text-4xl font-bold text-slate-900">My Applications</h1>
-        <p class="text-slate-500 mt-2">Track all your job applications in one place.</p>
-      </div>
+            <a href="resume.html"
+               class="px-5 py-2.5 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition-all duration-300 hover:-translate-y-1">
+                Resume
+            </a>
 
-      <button class="bg-indigo-600 text-white px-6 py-3 rounded-xl font-semibold">
-        + Find New Jobs
-      </button>
-    </div>
+        </div>
 
-    <!-- Stats -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-8">
-
-      <div class="bg-white border rounded-2xl p-6">
-        <p class="text-slate-500 text-sm">Total Applications</p>
-        <p class="text-3xl font-bold mt-2">24</p>
-      </div>
-
-      <div class="bg-white border rounded-2xl p-6">
-        <p class="text-slate-500 text-sm">In Review</p>
-        <p class="text-3xl font-bold mt-2 text-blue-600">8</p>
-      </div>
-
-      <div class="bg-white border rounded-2xl p-6">
-        <p class="text-slate-500 text-sm">Interviews</p>
-        <p class="text-3xl font-bold mt-2 text-purple-600">5</p>
-      </div>
-
-      <div class="bg-white border rounded-2xl p-6">
-        <p class="text-slate-500 text-sm">Offers</p>
-        <p class="text-3xl font-bold mt-2 text-green-600">2</p>
-      </div>
+        <a href="profile.html"
+           class="hidden md:block px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600
+                  text-white font-semibold transition-all duration-300 hover:scale-105">
+            Get Started
+        </a>
 
     </div>
-
-    <!-- Applications -->
-    <section class="bg-white border rounded-3xl mt-8 overflow-hidden">
-
-      <div class="p-6 border-b flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <h2 class="text-xl font-bold">Recent Applications</h2>
-
-        <div class="flex gap-2">
-          <button class="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-lg text-sm font-semibold">
-            All
-          </button>
-          <button class="px-4 py-2 hover:bg-slate-100 rounded-lg text-sm">Active</button>
-          <button class="px-4 py-2 hover:bg-slate-100 rounded-lg text-sm">Closed</button>
-        </div>
-      </div>
-
-      <div class="divide-y">
-
-        <!-- Application -->
-        <div class="p-6 hover:bg-slate-50 transition">
-          <div class="flex flex-col md:flex-row md:items-center gap-5">
-
-            <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl font-bold">
-              G
-            </div>
-
-            <div class="flex-1">
-              <h3 class="font-bold text-lg">Frontend Developer</h3>
-              <p class="text-slate-500">Google · Bengaluru</p>
-              <p class="text-xs text-slate-400 mt-2">Applied Aug 15, 2026</p>
-            </div>
-
-            <span class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-semibold">
-              In Review
-            </span>
-
-            <button class="border px-4 py-2 rounded-xl hover:bg-white">
-              View
-            </button>
-
-          </div>
-        </div>
-
-        <div class="p-6 hover:bg-slate-50 transition">
-          <div class="flex flex-col md:flex-row md:items-center gap-5">
-
-            <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl font-bold">
-              A
-            </div>
-
-            <div class="flex-1">
-              <h3 class="font-bold text-lg">UI/UX Designer</h3>
-              <p class="text-slate-500">Adobe · Hyderabad</p>
-              <p class="text-xs text-slate-400 mt-2">Applied Aug 12, 2026</p>
-            </div>
-
-            <span class="px-4 py-2 bg-purple-50 text-purple-600 rounded-full text-sm font-semibold">
-              Interview
-            </span>
-
-            <button class="border px-4 py-2 rounded-xl hover:bg-white">
-              View
-            </button>
-
-          </div>
-        </div>
-
-        <div class="p-6 hover:bg-slate-50 transition">
-          <div class="flex flex-col md:flex-row md:items-center gap-5">
-
-            <div class="w-14 h-14 rounded-2xl bg-green-100 text-green-600 flex items-center justify-center text-xl font-bold">
-              M
-            </div>
-
-            <div class="flex-1">
-              <h3 class="font-bold text-lg">Product Manager</h3>
-              <p class="text-slate-500">Microsoft · Pune</p>
-              <p class="text-xs text-slate-400 mt-2">Applied Aug 10, 2026</p>
-            </div>
-
-            <span class="px-4 py-2 bg-green-50 text-green-600 rounded-full text-sm font-semibold">
-              Offer
-            </span>
-
-            <button class="border px-4 py-2 rounded-xl hover:bg-white">
-              View
-            </button>
-
-          </div>
-        </div>
-
-        <div class="p-6 hover:bg-slate-50 transition">
-          <div class="flex flex-col md:flex-row md:items-center gap-5">
-
-            <div class="w-14 h-14 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center text-xl font-bold">
-              A
-            </div>
-
-            <div class="flex-1">
-              <h3 class="font-bold text-lg">Software Engineer</h3>
-              <p class="text-slate-500">Amazon · Bengaluru</p>
-              <p class="text-xs text-slate-400 mt-2">Applied Aug 05, 2026</p>
-            </div>
-
-            <span class="px-4 py-2 bg-red-50 text-red-600 rounded-full text-sm font-semibold">
-              Rejected
-            </span>
-
-            <button class="border px-4 py-2 rounded-xl hover:bg-white">
-              View
-            </button>
-
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-</body>
-</html>
+</nav>
